@@ -1,0 +1,201 @@
+/*****************
+**General Layout**
+******************/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+scroll-behavior: smooth;
+width: 100%;
+}
+
+.row,
+.container {
+    display: block;
+    width: 100%;
+}
+
+.row > .container {
+    margin: auto;
+    max-width:  1366px;
+}
+
+
+/*************
+**Navigation**
+**************/
+
+a,
+a:visited {
+    color: #6d2c23;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    transition: all 250ms ease-in-out;
+}
+
+a:hover,
+a:active {
+    color: #fc709b;
+    font-weight: 700;
+}
+
+a:focus {
+    text-decoration: underline;
+}
+
+.main-nav {
+    padding-top: 2em;
+}
+
+.main-nav ul {
+display: flex;
+justify-content: end;
+list-style-type: none;
+padding-right: 2em;
+}
+
+.main-nav ul li {
+    margin: 0 1em;
+}
+
+
+/****************
+**Header Styles**
+*****************/
+
+.main-header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4em;
+}
+
+.main-header__img,
+.main-header__section {
+    margin: 0 3em;
+    padding: 1em;
+}
+
+.main-header__section h1,
+.main-header__section h2 {
+    margin: 0 auto 1em;
+}
+
+.main-header__section h1 {
+    color: #6d2c23;
+    font-size: 3em;
+}
+
+.main-header__section h2 {
+    color: #7f392c;
+    font-size: 1.25em;
+}
+
+.signup h1,
+.signup h2 {
+    margin: .66rem auto;
+    padding: .25rem;
+}
+
+.main-header__section a button {
+    background: #e6e6e6;
+    border: none;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .75em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 1em auto;
+    min-width: 175px;
+    padding: 1em 1.5em;
+    transition: all 250ms ease-in-out;
+}
+
+.main-header__section a button:hover {
+    background: #a1412b;
+    color: #fff;
+}
+
+.main-header__section a button:focus {
+    outline: 1px dotted #a1412b;
+}
+
+
+/***************
+** Form Styles**
+****************/
+.form-control {
+    display: block;
+}
+
+.form-control label,
+.form-control input {
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15em;
+    font-weight: 500;
+    line-height: 1.5;
+    min-width: 100px;
+}
+
+.form-control button {
+    background: #e6e6e6;
+    border: none;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: .75em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 1em auto;
+    min-width: 175px;
+    padding: 1em 1.5em;
+    transition: all 250ms ease-in-out;
+}
+
+.form-control button:hover {
+    background: #a1412b;
+    color: #fff;
+}
+
+.form-control button:focus {
+    outline: 1px dotted #a1412b;
+}
+
+
+
+
+/*************
+**Footer******
+**************/
+.main-footer {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    padding-bottom: 1.5em;
+    position: fixed;
+    transform: translateX(-50%);
+}
+
+.main-footer p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    font-weight: 600;
+    letter-spacing: 1.25px;
+    line-height: 1.5;
+    margin: 0 .25em;
+}

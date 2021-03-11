@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<div class="wrapper">
+    <div class="row">
+        <div class="container">
+            <header class="main-header">
+                <figure class="main-header__img">
+                    <img src="/static/img/turkey.png" alt="Turkey">
+                </figure>
+                <section class="main-header__section signup">
+                    <h1>Sign Up</h1>
+                    <h2>To Get Started</h2>
+                    <form>
+                        <div class="form-control">
+                            <label for="email">Email: </label>
+                            <input type="text" name="email" required>
+                            <small class="email error"></small>
+                        </div>
+                        <div class="form-control">
+                            <label for="password">Password: </label>
+                            <input type="password" name="password" required>
+                            <small class="password error"></small>
+                        </div>
+                        <div class="form-control">
+                            <button>Submit</button>
+                        </div>
+                    </form>
+                </section>
+            </header>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
