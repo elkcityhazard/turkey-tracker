@@ -78,7 +78,7 @@ padding-right: 2em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 4em;
+    margin-top: 2em;
 }
 
 .main-header__img,
@@ -138,6 +138,7 @@ padding-right: 2em;
 ****************/
 .form-control {
     display: block;
+    margin-bottom: 1em;
 }
 
 .form-control label,
