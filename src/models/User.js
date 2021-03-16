@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcryptjs');
+const Product = require('./Product');
 
 //  create the user model
 
@@ -42,6 +43,17 @@ userSchema.statics.login = async function(email, password) {
     }
     throw Error('Incorrect Email');
 }
+
+//  Middleware that Deletes User Products When User Is Removed
+
+userSchema.pre('remove', async function(next) {
+    const user = this;
+    console.log(user._id, 'middlewear ran')
+    await Product.deleteMany({
+        owner: user._id
+    })
+    next();
+})
 
 userSchema.virtual('products', {
     ref: 'Product',

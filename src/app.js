@@ -36,5 +36,5 @@ app.get('/', (req, res) => {
     })
 });
 
-app.use(authRoutes);
-app.use('/products', productRoutes);
+app.use('/api/user', authRoutes);
+app.use('/api/products', productRoutes);

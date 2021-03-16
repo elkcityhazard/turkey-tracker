@@ -14,7 +14,7 @@ async function request (url, parent) {
         const div = document.createElement('div');
         div.classList.add('product-card')
         div.innerHTML = `
-        <img src="/products/${product._id}/image" alt="${product.name}" width="100%" height="auto" style="object-fit:cover;">
+        <img src="/api/products/${product._id}/image" alt="${product.name}" width="100%" height="auto" style="object-fit:cover;">
         <ul>
             <li><strong>Name: </strong>${product.name}</li>
             <li><strong>Price: </strong>${product.price}</li>
@@ -27,4 +27,4 @@ async function request (url, parent) {
     })
 }
 
-request('/products');
+request('/api/products');

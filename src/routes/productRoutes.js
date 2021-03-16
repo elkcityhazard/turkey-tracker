@@ -5,21 +5,6 @@ const {checkUser, requireAuth} = require('../middleware/authMiddleware')
 const multer = require('multer');
 const Product = require('../models/Product');
 
-
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, 'uploads/products')
-//     },
-//     filename: function (req, file, cb) {
-//         if (file.originalname.endsWith('.jpg')) {
-//             cb(null, file.fieldname + '-' + Date.now() + '.jpg')
-//         }
-//         if (file.originalname.endsWith('.png')) {
-//             cb(null, file.fieldname + '-' + Date.now() + '.png')
-//         }
-//     }
-//   })
-
   const upload = multer({
     limits: {
         fileSize: 3000000

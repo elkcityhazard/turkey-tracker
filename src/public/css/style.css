@@ -195,10 +195,71 @@ padding-right: 2em;
     grid-template-columns: repeat(3, minmax(299px, 2fr));
     justify-content: center;
     padding: 1em 1.5em;
+    text-align: center;
 }
 
 .products ul {
     list-style-type: none;
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.products ul + button {
+    background: #e6e6e6;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 7px -3px rgba(0, 0 , 0.25);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.12rem;
+    font-weight: 400;
+    margin: 1rem auto;
+    padding: .5rem 1rem;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    transition: all 250ms linear;
+    -webkit-transition: all 250ms linear;
+}
+
+.products ul + button:hover {
+    color: #fff;
+}
+.products ul + button:focus {
+    color: #fff;
+    outline: 2px solid #af8c87;
+}
+
+.products ul + button::after {
+    content: 'Add To Cart';
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    left: 0;
+    margin: 0rem auto;
+    opacity: 0;
+    padding: .5rem 1rem;
+    position: absolute;
+    top: 0;
+    transform: translateX(105%) skewX(45deg);
+    transition: all 250ms linear;
+    height: 100%;
+    width: 100%;
+}
+
+
+.products ul + button:hover::after,
+.products ul + button:focus::after {
+    opacity: .75;
+    transform: translateX(0);
+}
+
+
+
+.product-card {
+    box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.33);
+    padding: .5rem;
 }
 
 
