@@ -1,6 +1,8 @@
+
 const prodContainer = document.querySelector('.main.products');
-console.log(prodContainer)
-async function request (url, parent) {
+let dataArray = [];
+
+async function request (url, parent, callback) {
     const res = await fetch(url, {
         method: 'GET',
         headers: {'Content-Type' : 'application/json'}
@@ -10,7 +12,7 @@ async function request (url, parent) {
     const {products} = data;
     console.log(products)
 
-    products.forEach((product) => {
+    await products.forEach((product) => {
         const div = document.createElement('div');
         div.classList.add('product-card')
         div.innerHTML = `
@@ -27,4 +29,19 @@ async function request (url, parent) {
     })
 }
 
-request('/api/products');
+
+request('/api/products')
+.then(() => {
+    const productBtns = document.querySelectorAll('.addToCart');
+    localStorage.setItem('product', []);
+    productBtns.forEach((product) => {
+        product.addEventListener('click', (e) => {
+            const data = product.getAttribute('data-id');
+            dataArray.push(data);
+            localStorage.setItem('product', dataArray);
+            console.log(localStorage);
+            
+    })
+})
+
+});
