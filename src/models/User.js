@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: [6, 'Minimum password is 6 characters']
     }
+}, {
+    timestamps: true
 });
 
 //  salt and hash the password before saving
@@ -40,6 +42,12 @@ userSchema.statics.login = async function(email, password) {
     }
     throw Error('Incorrect Email');
 }
+
+userSchema.virtual('products', {
+    ref: 'Product',
+    localField: '_id',
+    foreignField: 'owner'
+})
 
 
 const User = mongoose.model('user', userSchema);

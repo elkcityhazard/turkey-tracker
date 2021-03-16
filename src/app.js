@@ -5,6 +5,8 @@ const dotenv = require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 4000;
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const {requireAuth, checkUser, checkProduct} = require('./middleware/authMiddleware');
 
 const app = express();
 
@@ -27,8 +29,12 @@ mongoose.connect(process.env.MONGOURI, {useNewUrlParser: true, useUnifiedTopolog
 .catch((err) => console.log(err));
 
 // Routes
+app.get('*', checkUser);
 app.get('/', (req, res) => {
-    res.render('home')
+    res.render('home', {
+        path: ''
+    })
 });
 
 app.use(authRoutes);
+app.use('/products', productRoutes);

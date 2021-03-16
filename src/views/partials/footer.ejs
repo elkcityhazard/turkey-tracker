@@ -5,7 +5,13 @@
         </footer>
     </div>
 </div>
+<% if (path === '/login'  || path === '/signup') { %>
+    <script src="/static/js/validateUser.js"></script>
+<% } %>
 
+<% if (path === '/products/view-products') { %>
+    <script src="/static/js/getProducts.js"></script>
+<% } %>
 <script>
     const year = new Date().getFullYear();
     document.getElementById('year').textContent = year;

@@ -7,10 +7,18 @@
                     <img src="/static/img/turkey.png" alt="Turkey">
                 </figure>
                 <section class="main-header__section">
-                    <h1>Return to Tradition</h1>
+                    <% if (user) { %>
+                        <h1><%= user.email %>, </h1>
+                        <h2>We have the perfect Turkey for you</h2>
+                        <a href="/turkeys">
+                            <button>Browse Now</button></a>
+                    <% } else { %>
+                        <h1>Return to Tradition</h1>
                     <h2>Order your Organic, Pasture Raised Turkey Today</h2>
                     <a href="/signup">
-                    <button>Sign Up</button></a>
+                        <button>Sign Up</button></a>
+                    <% } %>
+                    
                 </section>
             </header>
         </div>
