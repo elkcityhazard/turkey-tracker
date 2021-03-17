@@ -14,11 +14,11 @@
           <ul>
             <% if ( user ) { %>
                 <li><span>Welcome, <%= user.email %></span></li>
-                <li><a href="/products/view-products">Shop Now</a></li>
-                <li><a href="/logout">Log out</a></li>
+                <li><a href="/api/products/view-products">Shop Now</a></li>
+                <li><a href="/api/user/logout">Log out</a></li>
               <% } else { %>
-                <li><a href="/login">Log in</a></li>
-                <li><a href="/signup" class="btn">Sign up</a></li>
+                <li><a href="/api/user/login">Log in</a></li>
+                <li><a href="/api/user/signup" class="btn">Sign up</a></li>
               <% } %>
           </ul>
         </nav>
