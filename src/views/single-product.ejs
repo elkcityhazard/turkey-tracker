@@ -42,6 +42,72 @@
             </main>
         </div>
     </div>
+    <% if (user) { %>
+        <div class="row">
+            <div class="container">
+                <form class="edit">
+                    <div class="form-control">
+                        <label for="name">Name: </label>
+                        <input type="text" name="name">
+                        <small class="namel error"></small>
+                    </div>
+                    <div class="form-control">
+                        <label for="price">Price: </label>
+                        <input type="number" name="price" step=".01">
+                        <small class="price error"></small>
+                    </div>
+                    <div class="form-control">
+                        <label for="description">Description: </label>
+                        <input type="text" name="description">
+                        <small class="description error"></small>
+                    </div>
+                    <div class="form-control">
+                        <label for="setInventory">set Inventory: </label>
+                        <input type="number" name="setInventory" step="1">
+                        <small class="setInventory error"></small>
+                    </div>
+                    <div class="form-control">
+                        <label for="sold">Sold: </label>
+                        <input type="number" name="sold" step="1">
+                        <small class="sold error"></small>
+                    </div>
+                    <div class="form-control">
+                        <button>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <% } %>
 </div>
+
+<script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = form.name.value;
+        const price = form.price.value;
+        const description = form.description.value;
+        const setInventory = form.setInventory.value;
+        const sold = form.sold.value;
+
+        async function updateProduct(url, method) {
+            const res = await fetch(url, {
+                method: method,
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({name, price, description, setInventory, sold})
+            }).then(() => {
+                location.reload();
+            })
+
+            const data = await res.json();
+            console.log(data);
+        }
+
+        //  Call updateProduct
+
+        updateProduct( '/api/products/<%= id %>', 'PATCH');
+    })
+</script>
 
 <%- include('partials/footer') %>

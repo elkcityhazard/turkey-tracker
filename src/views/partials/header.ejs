@@ -15,6 +15,7 @@
             <% if ( user ) { %>
                 <li><span>Welcome, <%= user.email %></span></li>
                 <li><a href="/api/products/view-products">Shop Now</a></li>
+                <li><a href="/edit-product">Edit Products</a></li>
                 <li><a href="/api/user/logout">Log out</a></li>
               <% } else { %>
                 <li><a href="/api/user/login">Log in</a></li>

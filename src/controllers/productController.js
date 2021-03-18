@@ -33,6 +33,7 @@ module.exports.viewSingleProduct = async (req, res) => {
     }
     res.status(200).render('single-product', {
       path: '/api/products/:id',
+      id: product._id
     });
   } catch (err) {
     return res.status(404).json({
@@ -64,6 +65,35 @@ exports.addNewProduct = async (req, res, next) => {
     });
   }
 };
+
+module.exports.updateProduct = async (req, res) => {
+  try {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['name', 'price', 'description', 'setInventory', 'sold'];
+    const isValidOperation = updates.every((update) => {
+      return allowedUpdates.includes(update);
+    });
+  
+    //  Check to see if the updated properties are invalid
+  
+    if (!isValidOperation) {
+      return res.status(400).send({
+        msg: 'The property you are trying to update is not available',
+      });
+    }
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      product
+    })
+
+
+  } catch (err) {
+    return res.status(404).json({
+      msg: err.message
+    })
+  }
+
+}
 
 module.exports.uploadImage = async (req, res, next) => {
   const buffer = await sharp(req.file.buffer)

@@ -1,0 +1,79 @@
+<%- include('partials/header') %>
+<div class="wrapper">
+  <div id="cartHolder"></div>
+  <div class="row">
+    <div class="container">
+      <header class="main-header">
+        <!-- <figure class="main-header__img">
+                    <img src="/static/img/turkey.png" alt="Turkey">
+                </figure> -->
+        <section class="main-header__section">
+          <h1><%= title %></h1>
+          <h2></h2>
+        </section>
+      </header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <main class="main">
+        <div class="row">
+          <div class="container">
+            <div class="col">
+              <header class="product-header">
+                <h3 class="product-header__description">Description</h3>
+              </header>
+            </div>
+            <div class="col">
+                <table class="product-table">
+
+                </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+    const productTable = document.querySelector('.product-table');
+  async function fetchProduct(url, method, callback) {
+    const res = await fetch(url, {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const data = await res.json();
+    return data;
+  }
+
+  fetchProduct('/api/products', 'GET').then((data) => {
+    productTable.innerHTML = `
+    <tr>
+        <th>ID </th>
+        <th>Name </th>
+        <th>Price </th>
+        <th>Description</th>
+        <th>On Hand</th>
+        <th>Sold</th>
+        <th>Edit</th>    
+    </tr>
+    `
+    data.products.forEach(prod => {
+        productTable.innerHTML +=
+         `
+         <tr>
+            <td>${prod._id}</td>
+            <td>${prod.name}</td>
+            <td>${prod.price}</td>
+            <td>${prod.description}</td>
+            <td>${prod.setInventory}</td>
+            <td>${prod.sold}</td>
+            <td><a href="/api/products/${prod._id}">Edit</a></td>
+            </tr>
+         `
+    })
+  });
+</script>
+
+<%- include('partials/footer') %>

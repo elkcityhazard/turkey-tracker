@@ -36,5 +36,12 @@ app.get('/', (req, res) => {
     })
 });
 
+app.get('/edit-product', requireAuth, async (req, res) => {
+    res.render('edit-product', {
+        title: 'Add New Products',
+        path: '/add-products'
+    })
+})
+
 app.use('/api/user', authRoutes);
 app.use('/api/products', productRoutes);

@@ -22,9 +22,11 @@ productRouter.get('/', productController.getAllProducts);
 
 productRouter.get('/view-products', productController.viewAllProducts);
 
-productRouter.get('/:id', productController.viewSingleProduct);
+productRouter.get('/:id', checkUser, productController.viewSingleProduct);
 
 productRouter.post('/', checkUser, productController.addNewProduct);
+
+productRouter.patch('/:id', checkUser, productController.updateProduct);
 
 productRouter.post('/upload/:id', checkUser, upload.single('img'), productController.uploadImage);
 

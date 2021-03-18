@@ -41,20 +41,6 @@ request('/api/products').then((data) => {
   })
 }).then(() => {
   const prodCard = document.querySelectorAll('.product-card');
-  prodCard.forEach((card) => {
-      card.addEventListener('mouseover', (e) => {
-          card.classList.add('tooltip');
-          const tooltip = document.querySelector('.tooltip');
-          tooltip.style.left = e.clientX;
-          tooltip.style.top = e.clientY;
-      })
-  })
-
-  prodCard.forEach((card) => {
-    card.addEventListener('mouseleave', () => {
-      card.classList.remove('tooltip');
-    })
-  })
 
 });
 
