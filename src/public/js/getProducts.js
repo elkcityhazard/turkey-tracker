@@ -14,7 +14,7 @@ async function request(url, parent, callback) {
     const div = document.createElement('div');
     div.classList.add('product-card');
     div.innerHTML = `
-        <img src="/api/products/${product._id}/image" alt="${product.name}" width="100%" height="auto" style="object-fit:cover;">
+        <img src="/api/products/${product._id}/image" id="${product._id}" alt="${product.name}" width="100%" height="auto" style="object-fit:cover;">
         <ul>
             <li><strong>Name: </strong>${product.name}</li>
             <li><strong>Price: </strong>${product.price}</li>
@@ -28,27 +28,33 @@ async function request(url, parent, callback) {
   });
 }
 
-async function updateCart(array) {
-    document.getElementById('cartHolder').innerHTML = '';
-    const ul = document.createElement('ul');
-    await array.forEach(arr => {
-        let li = document.createElement('li');
-        li.textContent = arr;
-        ul.append(li)
-    })
-    document.getElementById('cartHolder').append(ul);
-    console.log(array);
-}
 
-request('/api/products').then(async (data) => {
-  const productBtns = document.querySelectorAll('.addToCart');
-  localStorage.setItem('product', []);
-  productBtns.forEach((product) => {
-    product.addEventListener('click', async (e) => {
-      const data = product.getAttribute('data-id');
-      dataArray.push(data);
-      localStorage.setItem('product', dataArray);
-      updateCart(dataArray);
-    });
-  });
+request('/api/products').then((data) => {
+  const prodBtns = document.querySelectorAll('.addToCart');
+  const prodImg = document.querySelectorAll('.product-card img');
+
+  prodImg.forEach((img) => {
+    img.addEventListener('click', (e) => {
+      const id = img.getAttribute('id');
+      location.assign(`/api/products/${id}`)
+    })
+  })
+}).then(() => {
+  const prodCard = document.querySelectorAll('.product-card');
+  prodCard.forEach((card) => {
+      card.addEventListener('mouseover', (e) => {
+          card.classList.add('tooltip');
+          const tooltip = document.querySelector('.tooltip');
+          tooltip.style.left = e.clientX;
+          tooltip.style.top = e.clientY;
+      })
+  })
+
+  prodCard.forEach((card) => {
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('tooltip');
+    })
+  })
+
 });
+

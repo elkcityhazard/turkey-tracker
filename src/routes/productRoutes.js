@@ -20,9 +20,11 @@ const Product = require('../models/Product');
 
 productRouter.get('/', productController.getAllProducts);
 
-productRouter.post('/', checkUser, productController.addNewProduct);
-
 productRouter.get('/view-products', productController.viewAllProducts);
+
+productRouter.get('/:id', productController.viewSingleProduct);
+
+productRouter.post('/', checkUser, productController.addNewProduct);
 
 productRouter.post('/upload/:id', checkUser, upload.single('img'), productController.uploadImage);
 

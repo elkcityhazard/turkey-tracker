@@ -9,9 +9,9 @@
     <script src="/static/js/validateUser.js"></script>
 <% } %>
 
-<% if (path === '/products/view-products') { %>
-    <script src="/static/js/getProducts.js" async></script>
-    <script src="/static/js/createCart.js" async></script>
+<% if (path === '/api/products/view-products') { %>
+    <script src="/static/js/getProducts.js" async="true"></script>
+    <script src="/static/js/createCart.js" async="true"></script>
 <% } %>
 <script>
     const year = new Date().getFullYear();

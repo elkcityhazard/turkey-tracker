@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+<div class="wrapper">
+    <div id="cartHolder"></div>
+    <div class="row">
+        <div class="container">
+            <header class="main-header">
+                <!-- <figure class="main-header__img">
+                    <img src="/static/img/turkey.png" alt="Turkey">
+                </figure> -->
+                <section class="main-header__section single-product">
+                    <h1><%= product.name %></h1>
+                    <h2>&#36; <%= product.price %> Per Pound</h2>
+                </section>
+            </header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <main class="main products single-product">
+                <div class="row">
+                    <div class="container single-product">
+                        <div class="col">
+                            <header class="product-header">
+                                <h3 class="product-header__description">Description</h3>
+                            </header>
+                            <p><%= product.description %></p>
+                        </div>
+                        <div class="col">
+                            <header class="product-header">
+                                <h3 class="product-header__image">Image</h3>
+                            </header>
+                            <figure>
+                                <img src="/api/products/<%-product._id %>/image" alt="<%= product.name %>">
+                                <figcaption><%- product.description %></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col">
+                            <button class="addToCart" data-id="<%- product._id %>">Add To Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

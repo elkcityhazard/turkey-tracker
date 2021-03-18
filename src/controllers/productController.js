@@ -1,23 +1,42 @@
-const Product = require("../models/Product");
-const sharp = require("sharp");
+const Product = require('../models/Product');
+const sharp = require('sharp');
 
 exports.getAllProducts = async (req, res, next) => {
-  
   const products = await Product.find({});
+  console.log(products);
+  if (!products) {
+    throw Error('cannot be found');
+  }
   res.status(200).json({
     products,
   });
 };
 
-module.exports.viewAllProducts = (req, res, next) => {
+exports.viewAllProducts =  (req, res, next) => {
+res.render('products', {
+      title: 'Shop Our Products',
+      path: '/api/products/view-products',
+    });
+};
+
+module.exports.viewSingleProduct = async (req, res) => {
+  console.log(req.params.id)
   try {
-    res.render("products", {
-      title: "Shop Our Products",
-      path: "/products/view-products",
+    const id = req.params.id;
+    const product = await Product.findById(id);
+    res.locals.product = product;
+    console.log(res.locals.product)
+    if (!product) {
+      return res.status(404).json({
+        msg: 'Product not found',
+      });
+    }
+    res.status(200).render('single-product', {
+      path: '/api/products/:id',
     });
   } catch (err) {
-    return res.status(400).json({
-      msg: "Products not Found",
+    return res.status(404).json({
+      msg: err.message,
     });
   }
 };
@@ -47,8 +66,10 @@ exports.addNewProduct = async (req, res, next) => {
 };
 
 module.exports.uploadImage = async (req, res, next) => {
-    const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250
-    }).png().toBuffer()
+  const buffer = await sharp(req.file.buffer)
+    .resize({ width: 250, height: 250 })
+    .png()
+    .toBuffer();
   try {
     const product = await Product.findById(req.params.id);
     product.image = buffer;
@@ -68,9 +89,9 @@ module.exports.getImage = async (req, res) => {
     const product = await Product.findById(req.params.id);
     console.log(product.image);
     if (!product || !product.image) {
-      throw new Error("cannot find product or product image");
+      throw new Error('cannot find product or product image');
     }
-    res.set("Content-Type", "image/jpeg");
+    res.set('Content-Type', 'image/jpeg');
     res.send(product.image);
   } catch (err) {
     res.status(404).json({
@@ -88,7 +109,7 @@ module.exports.deleteImage = async (req, res, next) => {
     await product.save();
     res.status(200).json({
       id: product._id,
-      msg: "image deleted",
+      msg: 'image deleted',
     });
   } catch (err) {
     res.status(400).json({

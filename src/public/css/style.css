@@ -14,6 +14,10 @@ scroll-behavior: smooth;
 width: 100%;
 }
 
+.main.products.single-product {
+    grid-template-columns: 1fr;
+}
+
 .row,
 .container {
     display: block;
@@ -24,6 +28,13 @@ width: 100%;
     margin: auto;
     max-width:  1366px;
 }
+.row > .container.single-product {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 
 /*************
@@ -109,6 +120,11 @@ padding-right: 2em;
 .main-header__section h2 {
     color: #7f392c;
     font-size: 1.25em;
+}
+
+.main-header__section.single-product h1,
+.main-header__section.single-product h2 {
+    text-align: center;
 }
 
 .signup h1,
@@ -260,6 +276,29 @@ padding-right: 2em;
 .product-card {
     box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.33);
     padding: .5rem;
+}
+.product-card img {
+    cursor: pointer;
+    opacity: .75;
+    position: relative;
+    transition: opacity 250ms linear;
+}
+
+.product-card.tooltip {
+    background: #000;
+    color: #fff;
+    content: 'Click To View More';
+    display: inline;
+    height: 25px;
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    left: 0;
+
+}
+
+.product-card img:hover {
+    opacity: 1;
 }
 
 
