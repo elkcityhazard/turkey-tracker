@@ -24,23 +24,47 @@ async function request(url, parent, callback) {
         <button class="addToCart" data-id="${product._id}">Add To Cart</button>
         `;
     prodContainer.append(div);
-    return data;
   });
+  return products;
 }
 
-
-request('/api/products').then((data) => {
-  const prodBtns = document.querySelectorAll('.addToCart');
-  const prodImg = document.querySelectorAll('.product-card img');
-
-  prodImg.forEach((img) => {
-    img.addEventListener('click', (e) => {
-      const id = img.getAttribute('id');
-      location.assign(`/api/products/${id}`)
-    })
+request('/api/products')
+  .then((products) => {
+    const prodImg = document.querySelectorAll('.product-card img');
+    prodImg.forEach((img) => {
+      img.addEventListener('click', (e) => {
+        const id = img.getAttribute('id');
+        location.assign(`/api/products/${id}`);
+      });
+    });
+    return products;
   })
-}).then(() => {
-  const prodCard = document.querySelectorAll('.product-card');
+  .then((products) => {
+    const prodCard = document.querySelectorAll('.product-card');
+    const prodBtns = document.querySelectorAll('.addToCart');
+    const shoppingList = document.querySelector('.shopping-list');
+    let basket = [];
+    prodBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = e.target.getAttribute('data-id');
 
-});
-
+        //  find product in list
+        let currentProduct = products.forEach((product) => {
+          if (id === product._id) {
+            console.log(product)
+          let parsedProduct = {
+            id : product._id,
+            name: product.name,
+            price: product.price,
+            qty: 1
+          }
+          basket.every((parsedProduct) => {
+            return parsedProduct = this.id
+          })
+          basket.push(parsedProduct)
+          console.log(basket);
+        }})
+      });
+    });
+  });

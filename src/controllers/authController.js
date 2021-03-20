@@ -162,7 +162,9 @@ module.exports.logout_get = (req, res, next) => {
 
 module.exports.turkeys_get = (req, res, next) => {
   try {
-    res.status(200).render('products');
+    res.status(200).render('products', {
+      path: ''
+    });
   } catch (err) {
     res.status(401).json({
       msg: 'you are not logged in',

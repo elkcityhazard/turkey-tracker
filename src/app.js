@@ -43,5 +43,11 @@ app.get('/edit-product', requireAuth, async (req, res) => {
     })
 })
 
+app.get('/products', async (req, res, next) => {
+    res.status(200).render('products', {
+        path: '/products'
+    });
+})
+
 app.use('/api/user', authRoutes);
 app.use('/api/products', productRoutes);

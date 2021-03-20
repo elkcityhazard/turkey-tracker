@@ -18,6 +18,8 @@ const requireAuth = async (req, res, next) => {
                 next();
             }
             )
+    } else {
+      res.redirect('/');
     }
 }
 
