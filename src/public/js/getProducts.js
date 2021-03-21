@@ -2,6 +2,23 @@ const prodContainer = document.querySelector('.main.products');
 let dataArray = [];
 let cart = [];
 
+async function populateCart(product) {
+if(localStorage.getItem('products')) {
+  cart = await JSON.parse(localStorage.getItem('products'));
+}
+if (cart.indexOf(product)) {
+  for (let i = 0; i < cart.length; i++) {
+    if (product.id === cart[i].id) {
+      cart[i].qty += 1;
+      return localStorage.setItem('products', JSON.stringify(cart));
+    }
+  }
+} 
+  cart.push(product);
+  localStorage.setItem('products', JSON.stringify(cart))
+}
+
+
 async function request(url, parent, callback) {
   const res = await fetch(url, {
     method: 'GET',
@@ -49,22 +66,18 @@ request('/api/products')
         e.preventDefault();
         const id = e.target.getAttribute('data-id');
 
-        //  find product in list
+        //  find product in product Inventory
         let currentProduct = products.forEach((product) => {
           if (id === product._id) {
-            console.log(product)
           let parsedProduct = {
             id : product._id,
             name: product.name,
             price: product.price,
             qty: 1
           }
-          basket.every((parsedProduct) => {
-            return parsedProduct = this.id
-          })
-          basket.push(parsedProduct)
-          console.log(basket);
+          populateCart(parsedProduct)          
         }})
+
       });
     });
   });
