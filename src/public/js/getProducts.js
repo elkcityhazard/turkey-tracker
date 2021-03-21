@@ -1,20 +1,41 @@
 const prodContainer = document.querySelector('.main.products');
+const cartQty = document.querySelector('.qty-number');
 let dataArray = [];
 let cart = [];
+let qty = 0;
+
+if(localStorage.getItem('products')) {
+  cart =  JSON.parse(localStorage.getItem('products'));
+  qty =  JSON.parse(localStorage.getItem('qty'));
+  cartQty.innerText = qty;
+  cart.forEach(item => {
+    document.querySelector('.shopping-list').innerHTML += `
+    <li id="${item.id}">
+    <strong>Name: </strong><span>${item.name}</span>
+    <strong>Qty: </strong><span>${item.qty}</span>
+    <strong>Price: </strong><span>${item.price}</span>
+    </li>
+    `
+  })
+}
 
 async function populateCart(product) {
-if(localStorage.getItem('products')) {
-  cart = await JSON.parse(localStorage.getItem('products'));
-}
+
 if (cart.indexOf(product)) {
   for (let i = 0; i < cart.length; i++) {
     if (product.id === cart[i].id) {
       cart[i].qty += 1;
+      qty++;
+      cartQty.textContent = qty;
+      localStorage.setItem('qty', JSON.stringify(qty));
       return localStorage.setItem('products', JSON.stringify(cart));
     }
   }
 } 
   cart.push(product);
+  qty++
+  cartQty.innerText = qty;
+  localStorage.setItem('qty', JSON.stringify(qty));
   localStorage.setItem('products', JSON.stringify(cart))
 }
 
@@ -75,7 +96,7 @@ request('/api/products')
             price: product.price,
             qty: 1
           }
-          populateCart(parsedProduct)          
+          populateCart(parsedProduct)         
         }})
 
       });
