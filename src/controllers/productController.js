@@ -2,7 +2,7 @@ const Product = require('../models/Product');
 const sharp = require('sharp');
 
 exports.getAllProducts = async (req, res, next) => {
-  const products = await Product.find({});
+  const products = await Product.find();
   console.log(products);
   if (!products) {
     throw Error('cannot be found');
